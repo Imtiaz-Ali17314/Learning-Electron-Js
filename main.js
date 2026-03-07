@@ -1,0 +1,1 @@
+console.warn("Hello World! This is my first Electron App!");

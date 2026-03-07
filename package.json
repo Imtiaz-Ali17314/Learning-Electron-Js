@@ -1,0 +1,22 @@
+{
+  "name": "learning-electron-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Imtiaz-Ali17314/Learning-Electron-Js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Imtiaz-Ali17314/Learning-Electron-Js/issues"
+  },
+  "homepage": "https://github.com/Imtiaz-Ali17314/Learning-Electron-Js#readme",
+  "dependencies": {
+    "electron": "^40.8.0"
+  }
+}
