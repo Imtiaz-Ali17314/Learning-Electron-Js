@@ -2,10 +2,11 @@ const { app, BrowserWindow } = require("electron");
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 1200,
-    height: 1000,
+    width: 900,
+    height: 600,
     backgroundColor: "#e8e7e6",
     title: "Learning Electron App",
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -26,15 +27,15 @@ app.on('ready', () => {
 //   e.preventDefault();
 // });
 
-app.on('will-quit', (e) => {
-  console.log('App will quit');
-  e.preventDefault();
-});
+// app.on('will-quit', (e) => {
+//   console.log('App will quit');
+//   e.preventDefault();
+// });
 
-app.on('browser-window-focus', () => {
-  console.log('Browser window focused');
-});
+// app.on('browser-window-focus', () => {
+//   console.log('Browser window focused');
+// });
 
-app.on('browser-window-blur', () => {
-  console.log('Browser window blurred');
-});
+// app.on('browser-window-blur', () => {
+//   console.log('Browser window blurred');
+// });
