@@ -15,4 +15,26 @@ function createWindow() {
   win.webContents.openDevTools();
 }
 
-app.whenReady().then(createWindow);
+// app.whenReady().then(createWindow)
+
+app.on('ready', () => {
+  createWindow();
+});
+
+// app.on('before-quit', (e) => {
+//   console.log('App is about to quit');
+//   e.preventDefault();
+// });
+
+app.on('will-quit', (e) => {
+  console.log('App will quit');
+  e.preventDefault();
+});
+
+app.on('browser-window-focus', () => {
+  console.log('Browser window focused');
+});
+
+app.on('browser-window-blur', () => {
+  console.log('Browser window blurred');
+});
