@@ -1,7 +1,15 @@
-const { app, BrowserWindow, globalShortcut, dialog } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  globalShortcut,
+  dialog,
+  Tray,
+  Menu,
+} = require("electron");
 const windowStateKeeper = require("electron-window-state");
 
 let win;
+let tray;
 
 function createWindow() {
   const mainWindowState = windowStateKeeper({
@@ -38,6 +46,28 @@ function createWindow() {
         console.log(result.filePaths);
       });
   });
+
+  tray = new Tray("eleApp.png");
+  tray.setToolTip("This is my electron learning application.");
+  tray.on("click", () => {
+    win.isVisible() ? win.hide() : win.show();
+  });
+  let template = [
+    {
+      label: "Show App",
+      click: () => {
+        win.isVisible() ? win.hide() : win.show();
+      },
+      cursor: "pointer",
+    },
+    {
+      label: "Exit",
+      click: () => {
+        app.quit();
+      },
+    },
+  ];
+  tray.setContextMenu(Menu.buildFromTemplate(template));
 }
 
 // app.whenReady().then(createWindow)
@@ -45,8 +75,8 @@ function createWindow() {
 app.on("ready", () => {
   createWindow();
 
-  globalShortcut.register("CommandOrControl+X", () => {
-    console.log("CommandOrControl+X is pressed after app is ready");
+  globalShortcut.register("CommandOrControl+X+Z", () => {
+    console.log("CommandOrControl+X+Z is pressed after app is ready");
     win.reload();
   });
 });
