@@ -90,12 +90,13 @@ function createWindow() {
     // frame: false,
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
     },
   });
 
   win.loadFile("index.html");
 
-  // win.webContents.openDevTools();
+  win.webContents.openDevTools();
 
   mainWindowState.manage(win);
 

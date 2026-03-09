@@ -9,5 +9,18 @@
   <h2>This is App!</h2>
   <br><br><br>
   <input type="range" style="-webkit-app-region:none;"/>
+    <br><br><br>
+  
+  <button onclick="zoomIn()">ZoomIn</button>
+  <button onclick="zoomOut()">ZoomOut</button>
 </body>
+<script>
+  const { webFrame } = require("electron");
+  function zoomIn() {
+    webFrame.setZoomFactor(webFrame.getZoomFactor() + 0.1);
+  }
+  function zoomOut() {
+    webFrame.setZoomFactor(webFrame.getZoomFactor() - 0.1);
+  }
+</script>
 </html>
