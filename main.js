@@ -1,4 +1,4 @@
-const { app, BrowserWindow, globalShortcut } = require("electron");
+const { app, BrowserWindow, globalShortcut, dialog } = require("electron");
 const windowStateKeeper = require("electron-window-state");
 
 let win;
@@ -28,10 +28,16 @@ function createWindow() {
 
   mainWindowState.manage(win);
 
-  // globalShortcut.register("CommandOrControl+X", () => {
-  //   console.log("CommandOrControl+X is pressed");
-  //   win.reload();
-  // });
+  globalShortcut.register("shift+o", () => {
+    dialog
+      .showOpenDialog({
+        defaultPath: app.getPath("videos"),
+        buttonLabel: "Select file",
+      })
+      .then((result) => {
+        console.log(result.filePaths);
+      });
+  });
 }
 
 // app.whenReady().then(createWindow)
