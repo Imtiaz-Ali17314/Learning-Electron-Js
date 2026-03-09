@@ -13,14 +13,25 @@
   
   <button onclick="zoomIn()">ZoomIn</button>
   <button onclick="zoomOut()">ZoomOut</button>
+
+  <br><br>
+
+  <button onclick="sendMsg()">Send Message</button>
 </body>
 <script>
-  const { webFrame } = require("electron");
+  const { webFrame, ipcRenderer } = require("electron");
   function zoomIn() {
     webFrame.setZoomFactor(webFrame.getZoomFactor() + 0.1);
   }
   function zoomOut() {
     webFrame.setZoomFactor(webFrame.getZoomFactor() - 0.1);
+  }
+
+  function sendMsg() {
+    ipcRenderer.send("msg", "Hello from the renderer process!");
+    ipcRenderer.on("msg", (event, arg) => {
+      console.log(arg);
+    });
   }
 </script>
 </html>

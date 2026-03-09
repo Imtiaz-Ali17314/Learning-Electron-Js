@@ -5,8 +5,14 @@ const {
   dialog,
   Tray,
   Menu,
+  ipcMain,
 } = require("electron");
 const windowStateKeeper = require("electron-window-state");
+
+ipcMain.on("msg", (event, arg) => {
+  console.log(arg); 
+  event.reply("msg", "Thank You from the main process!");
+});
 
 let win;
 let tray;
@@ -77,7 +83,7 @@ let temaplate = [
 
 const menu = Menu.buildFromTemplate(temaplate);
 
-Menu.setApplicationMenu(menu);  // Top Manu Bar
+Menu.setApplicationMenu(menu); // Top Manu Bar
 
 // Create a new BrowserWindow when `app` is ready
 function createWindow() {
@@ -97,7 +103,8 @@ function createWindow() {
     backgroundColor: "#e8e7e6", // background color
     title: "Learning Electron App", // title of the window
     // frame: false,  -->  // to remove the default frame of the window
-    webPreferences: {  // to connect the main process with the renderer process
+    webPreferences: {
+      // to connect the main process with the renderer process
       nodeIntegration: true,
       contextIsolation: false,
     },
@@ -106,13 +113,15 @@ function createWindow() {
   win.loadFile("index.html"); // load the html file into the window
 
   win.webContents.openDevTools(); // open the DevTools.
-  win.webContents.on("context-menu", () => {  // to show the context menu (right click menu)
+  win.webContents.on("context-menu", () => {
+    // to show the context menu (right click menu)
     menu.popup();
   });
 
   mainWindowState.manage(win); // manage the window state (size and position)
 
-  globalShortcut.register("shift+o", () => {  // to register the global shortcut
+  globalShortcut.register("shift+o", () => {
+    // to register the global shortcut
     dialog
       .showOpenDialog({
         defaultPath: app.getPath("videos"),
