@@ -10,6 +10,8 @@ const windowStateKeeper = require("electron-window-state");
 
 let win;
 let tray;
+
+//  Menu Template
 let isMac = process.platform === "darwin";
 let temaplate = [
   isMac ? { role: "appMenu" } : { label: "Blog" },
@@ -73,34 +75,44 @@ let temaplate = [
   },
 ];
 
-Menu.setApplicationMenu(Menu.buildFromTemplate(temaplate));
+const menu = Menu.buildFromTemplate(temaplate);
+
+Menu.setApplicationMenu(menu);  // Top Manu Bar
+
+// Create a new BrowserWindow when `app` is ready
 function createWindow() {
   const mainWindowState = windowStateKeeper({
     defaultWidth: 900,
     defaultHeight: 600,
   });
 
+  // Create the browser window.
   win = new BrowserWindow({
+    // browser window size and position
     x: mainWindowState.x,
     y: mainWindowState.y,
     width: mainWindowState.width,
     height: mainWindowState.height,
-    backgroundColor: "#e8e7e6",
-    title: "Learning Electron App",
-    // frame: false,
-    webPreferences: {
+
+    backgroundColor: "#e8e7e6", // background color
+    title: "Learning Electron App", // title of the window
+    // frame: false,  -->  // to remove the default frame of the window
+    webPreferences: {  // to connect the main process with the renderer process
       nodeIntegration: true,
       contextIsolation: false,
     },
   });
 
-  win.loadFile("index.html");
+  win.loadFile("index.html"); // load the html file into the window
 
-  win.webContents.openDevTools();
+  win.webContents.openDevTools(); // open the DevTools.
+  win.webContents.on("context-menu", () => {  // to show the context menu (right click menu)
+    menu.popup();
+  });
 
-  mainWindowState.manage(win);
+  mainWindowState.manage(win); // manage the window state (size and position)
 
-  globalShortcut.register("shift+o", () => {
+  globalShortcut.register("shift+o", () => {  // to register the global shortcut
     dialog
       .showOpenDialog({
         defaultPath: app.getPath("videos"),
@@ -111,6 +123,7 @@ function createWindow() {
       });
   });
 
+  // Tray (The Icon which is shown in the right bottom corner of the screen)
   tray = new Tray("eleApp.png");
   tray.setToolTip("This is my electron learning application.");
   tray.on("click", () => {
