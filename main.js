@@ -10,7 +10,70 @@ const windowStateKeeper = require("electron-window-state");
 
 let win;
 let tray;
+let isMac = process.platform === "darwin";
+let temaplate = [
+  isMac ? { role: "appMenu" } : { label: "Blog" },
+  {
+    label: "File",
+    submenu: [
+      {
+        label: "Save",
+        click: () => {
+          console.log("Save menu item clicked");
+        },
+      },
+      {
+        label: "Save As",
+        click: () => {
+          console.log("Save As menu item clicked");
+        },
+      },
+      {
+        label: "Exit",
+        click: () => {
+          console.log("Exit menu item clicked");
+        },
+      },
+      {
+        label: "Reload",
+        click: () => {
+          console.log("Reload menu item clicked");
+        },
+      },
+    ],
+  },
+  {
+    label: "Edit",
+    submenu: [
+      {
+        label: "Cut",
+        click: () => {
+          console.log("Cut menu item clicked");
+        },
+      },
+      {
+        label: "Copy",
+        click: () => {
+          console.log("Copy menu item clicked");
+        },
+      },
+      {
+        label: "Paste",
+        click: () => {
+          console.log("Paste menu item clicked");
+        },
+      },
+    ],
+  },
+  {
+    label: "Help",
+    click: () => {
+      console.log("Help menu item clicked");
+    },
+  },
+];
 
+Menu.setApplicationMenu(Menu.buildFromTemplate(temaplate));
 function createWindow() {
   const mainWindowState = windowStateKeeper({
     defaultWidth: 900,
