@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, globalShortcut } = require("electron");
 const windowStateKeeper = require("electron-window-state");
 
 let win;
@@ -23,14 +23,26 @@ function createWindow() {
   });
 
   win.loadFile("index.html");
+
   // win.webContents.openDevTools();
+
   mainWindowState.manage(win);
+
+  // globalShortcut.register("CommandOrControl+X", () => {
+  //   console.log("CommandOrControl+X is pressed");
+  //   win.reload();
+  // });
 }
 
 // app.whenReady().then(createWindow)
 
-app.on('ready', () => {
+app.on("ready", () => {
   createWindow();
+
+  globalShortcut.register("CommandOrControl+X", () => {
+    console.log("CommandOrControl+X is pressed after app is ready");
+    win.reload();
+  });
 });
 
 // app.on('before-quit', (e) => {
