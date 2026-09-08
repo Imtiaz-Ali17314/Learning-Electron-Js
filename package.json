@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Imtiaz-Ali17314/Learning-Electron-Js.git"
+    "url": "git+https://github.com/imtiazaly/Learning-Electron-Js.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Imtiaz-Ali17314/Learning-Electron-Js/issues"
+    "url": "https://github.com/imtiazaly/Learning-Electron-Js/issues"
   },
-  "homepage": "https://github.com/Imtiaz-Ali17314/Learning-Electron-Js#readme",
+  "homepage": "https://github.com/imtiazaly/Learning-Electron-Js#readme",
   "dependencies": {
     "electron-window-state": "^5.0.3",
     "nodemon": "^3.1.14"
